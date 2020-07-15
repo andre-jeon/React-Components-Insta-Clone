@@ -5,14 +5,21 @@ Look at each file to see what props need to be passed.
 */
 
 // Import the state hook
-import React from "react";
+import React, { useState } from "react";
 // Import the Posts (plural!) and SearchBar components, since they are used inside App component
+import Posts from './components/Posts/Posts';
+import SearchBar from './components/SearchBar/SearchBar';
+
 // Import the dummyData
+
 import "./App.css";
+import dummyData from './dummy-data';
 
 const App = () => {
   // Create a state called 'posts' to hold the list of posts, initializing to dummyData.
   // To make the search bar work (which is stretch) we'd need another state to hold the search term.
+  const [posts, setPosts] = useState(dummyData);
+  // console.log(posts)
 
   const likePost = postId => {
     // This function is passed into nested components using props, to allow them to update application state.
@@ -21,11 +28,20 @@ const App = () => {
     // The callback passed into `posts.map()` performs the following logic:
     //  - if the `id` of the post matches `postId`, return a new post object containing an increased 'likes' count.
     //  - otherwise just return the post object unchanged.
+    setPosts(posts.map(p => {
+      if(p.id === postId) {
+        return { ...p, likes: p.likes + 1 }
+      } else {
+        return  p
+      }
+    }))
   };
 
   return (
     <div className="App">
       {/* Add SearchBar and Posts here to render them */}
+      <SearchBar />
+      <Posts posts = {posts} likePost = {likePost}/>
       {/* Check the implementation of each component, to see what props they require, if any! */}
     </div>
   );
