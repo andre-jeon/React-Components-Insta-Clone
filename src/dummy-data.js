@@ -22,6 +22,11 @@ const dummyData = [
                 username: "martinseludo",
                 text: "Can't wait to try it!",
             },
+            {
+                id: 25,
+                username: "andrejeon",
+                text: "Where was the invite?!",
+            },
         ],
     },
     {
